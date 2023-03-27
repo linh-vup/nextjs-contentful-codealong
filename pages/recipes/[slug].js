@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const client = createClient({
-  space: '3ek6401q3i94',
-  accessToken: 'HpvjWJqrVtNHqetfnOMKnl5g2DgIiuubDQbSQ2SYHEQ'
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_KEY
 });
 
 export const getStaticPaths = async () => {
@@ -19,12 +19,12 @@ export const getStaticPaths = async () => {
   });
 
   return {
-    paths: paths,
+    paths,
     fallback: false
   };
 };
 
-export async function getStaticProps({ params }) {
+export const getStaticProps = async ({ params }) => {
   const { items } = await client.getEntries({
     content_type: 'recipe',
     'fields.slug': params.slug
@@ -33,7 +33,7 @@ export async function getStaticProps({ params }) {
   return {
     props: { recipe: items[0] }
   };
-}
+};
 
 export default function RecipeDetails({ recipe }) {
   const { featuredImage, title, cookingTime, ingredients, method } =
