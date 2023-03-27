@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_ACCESS_KEY
+  space: '3ek6401q3i94',
+  accessToken: 'HpvjWJqrVtNHqetfnOMKnl5g2DgIiuubDQbSQ2SYHEQ'
 });
 
 export const getStaticPaths = async () => {
